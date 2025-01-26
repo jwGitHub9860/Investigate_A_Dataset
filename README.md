@@ -31,4 +31,6 @@ Hsu, Jonathan. “4 Simple Ways to Refactor Your Python Code.” _Medium_, Code 
 
 "Python For Data Science _Cheat Sheet_" _Cheat Sheet Numpy Python Copy.Indd_, assets.datacamp.com/blog_assets/Numpy_Python_Cheat_Sheet.pdf. Accessed 24 Jan. 2025. 
 
+Themlphdstudent. “Cheatsheet : Matplotlib Charts 📊.” _Kaggle_, Kaggle, 12 May 2024, www.kaggle.com/code/themlphdstudent/cheatsheet-matplotlib-charts. Accessed 26 Jan. 2025.
+
 “Udacity Git Commit Message Style Guide.” _Udacity Nanodegree Style Guide_, udacity.github.io/git-styleguide/. Accessed 22 Jan. 2025.
