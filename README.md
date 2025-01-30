@@ -15,9 +15,9 @@ tmdb-movies.csv
 ## Credits
 ###### References used while making project
 
-“DataFrame#.” _DataFrame - Pandas 2.2.3 Documentation_, pandas.pydata.org/pandas-docs/stable/reference/frame.html. Accessed 22 Jan. 2025. 
-
 "Data Wrangling with pandas Cheat Sheet." pandas.pydata.org/Pandas_Cheat_Sheet.pdf. Accessed 22 Jan. 2025.
+
+“Different ways to iterate over Rows in Pandas Dataframe.” _GeeksforGeeks_, 27 Nov. 2024, www.geeksforgeeks.org/different-ways-to-iterate-over-rows-in-pandas-dataframe/. Accessed 29 Jan. 2025.
 
 Gillis, Alexander S. “What Is Refactoring (Code Refactoring)?” _Search App Architecture_, TechTarget, 15 Sept. 2021, www.techtarget.com/searchapparchitecture/definition/refactoring#:~:text=Refactoring%20is%20the%20process%20of,altering%20the%20code’s%20external%20behavior. Accessed 22 Jan. 2025.
 
