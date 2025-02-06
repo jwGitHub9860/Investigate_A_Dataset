@@ -7482,9 +7482,6 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<blockquote>
-<p><strong>Tip</strong>: Welcome to the Investigate a Dataset project! You will find tips in quoted sections like this to help organize your approach to your investigation. Once you complete this project, remove these <strong>Tip</strong> sections from your report before submission. First things first, you might want to double-click this Markdown cell and change the title so that it reflects your dataset and investigation.</p>
-</blockquote>
 <h1 id="Project:-Investigate-a-Dataset---TMDb-movie-data">Project: Investigate a Dataset - TMDb movie data<a class="anchor-link" href="#Project:-Investigate-a-Dataset---TMDb-movie-data">¶</a></h1><h2 id="Table-of-Contents">Table of Contents<a class="anchor-link" href="#Table-of-Contents">¶</a></h2><ul>
 <li><a href="#intro">Introduction</a></li>
 <li><a href="#wrangling">Data Wrangling</a></li>
@@ -7502,10 +7499,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p><a id="intro"></a></p>
-<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">¶</a></h2><h3 id="Dataset-Description">Dataset Description<a class="anchor-link" href="#Dataset-Description">¶</a></h3><blockquote>
-<p><strong>Tip</strong>: In this section of the report, provide a brief introduction to the dataset you've selected/downloaded for analysis. Read through the description available on the <code>Project Details</code> page of <code>Investigate a Dataset</code> lesson for this course. List all column names in each table, and their significance. In case of multiple tables, describe the relationship between tables.</p>
-</blockquote>
-<p>The choosen dataset contains data of 10,000 movies from The Movie Database (TMDb).</p>
+<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">¶</a></h2><h3 id="Dataset-Description">Dataset Description<a class="anchor-link" href="#Dataset-Description">¶</a></h3><p>The choosen dataset contains data of 10,000 movies from The Movie Database (TMDb).</p>
 <h5 id="The-column-names-in-the-dataset-are-listed-below-and-explains-the-data-they-hold:">The column names in the dataset are listed below and explains the data they hold:<a class="anchor-link" href="#The-column-names-in-the-dataset-are-listed-below-and-explains-the-data-they-hold:">¶</a></h5><ul>
 <li><strong><em>id</em></strong> - movie id</li>
 <li><strong><em>imdb_id</em></strong> - imdb id</li>
@@ -7529,12 +7523,7 @@ a.anchor-link {
 <li><strong><em>budget_adj</em></strong> - amount of money spent to make movie in terms of 2010 dollars</li>
 <li><strong><em>revenue_adj</em></strong> - amount of money earned from making movie in terms of 2010 dollars</li>
 </ul>
-<h3 id="Question(s)-for-Analysis">Question(s) for Analysis<a class="anchor-link" href="#Question(s)-for-Analysis">¶</a></h3><blockquote>
-<p><strong>Tip</strong>: Clearly state one or more questions that you plan on exploring over the course of the report. You will address these questions in the <strong>data analysis</strong> and <strong>conclusion</strong> sections. Try to build your report around the analysis of at least one dependent variable and three independent variables. If you're not sure what questions to ask, then make sure you familiarize yourself with the dataset, its variables and the dataset context for ideas of what to explore.</p>
-</blockquote>
-<blockquote>
-<p><strong>Tip</strong>: Once you start coding, use NumPy arrays, Pandas Series, and DataFrames where appropriate rather than Python lists and dictionaries. Also, <strong>use good coding practices</strong>, such as, define and use functions to avoid repetitive code. Use appropriate comments within the code cells, explanation in the mark-down cells, and meaningful variable names.</p>
-</blockquote>
+<h3 id="Question(s)-for-Analysis">Question(s) for Analysis<a class="anchor-link" href="#Question(s)-for-Analysis">¶</a></h3>
 </div>
 </div>
 </div>
@@ -7554,13 +7543,14 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2024]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [34]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Use this cell to set up import statements for all of the packages that you</span>
 <span class="c1">#   plan to use.</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1"># While optional for current notebooks, if you are having trouble with visualizations,</span>
 <span class="c1">#   remember to include a 'magic word' so that your visualizations are plotted</span>
@@ -7580,12 +7570,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p><a id="wrangling"></a></p>
-<h2 id="Data-Wrangling">Data Wrangling<a class="anchor-link" href="#Data-Wrangling">¶</a></h2><blockquote>
-<p><strong>Tip</strong>: In this section of the report, you will load in the data, check for cleanliness, and then trim and clean your dataset for analysis. Make sure that you <strong>document your data cleaning steps in mark-down cells precisely and justify your cleaning decisions.</strong></p>
-</blockquote>
-<h3 id="General-Properties">General Properties<a class="anchor-link" href="#General-Properties">¶</a></h3><blockquote>
-<p><strong>Tip</strong>: You should <em>not</em> perform too many operations in each cell. Create cells freely to explore your data. One option that you can take with this project is to do a lot of explorations initially. This does not have to be organized, but make sure you use enough comments to understand the purpose of each code cell. Then, after you're done with your analysis, trim the excess and organize your steps so that you have a flowing, cohesive report.</p>
-</blockquote>
+<h2 id="Data-Wrangling">Data Wrangling<a class="anchor-link" href="#Data-Wrangling">¶</a></h2><h3 id="General-Properties">General Properties<a class="anchor-link" href="#General-Properties">¶</a></h3>
 </div>
 </div>
 </div>
@@ -7605,7 +7590,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2025]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [35]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Load your data and print out a few lines. What is the size of your dataframe? </span>
@@ -7625,7 +7610,7 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2025]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[35]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -7813,7 +7798,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2026]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [36]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">'keywords'</span><span class="p">]</span> <span class="c1"># displays "keywords" column data (ONLY column that was NOT SHOWN)</span>
@@ -7827,7 +7812,7 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2026]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[36]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>0        monster|dna|tyrannosaurus rex|velociraptor|island
 1         future|chase|post-apocalyptic|dystopia|australia
@@ -7861,7 +7846,7 @@ Name: keywords, Length: 10866, dtype: object</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2027]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [37]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">shape</span> <span class="c1"># displays size of dataframe </span>
@@ -7875,7 +7860,7 @@ Name: keywords, Length: 10866, dtype: object</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2027]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[37]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>(10866, 21)</pre>
 </div>
@@ -7898,7 +7883,7 @@ Name: keywords, Length: 10866, dtype: object</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2028]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [38]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="c1"># displays amount of NON-missing data in each column (only want to know LOCATION of null values in Columns)</span>
@@ -7914,7 +7899,7 @@ Name: keywords, Length: 10866, dtype: object</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2028]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[38]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>id                      10866
 imdb_id                 10856
@@ -7960,9 +7945,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Data-Cleaning">Data Cleaning<a class="anchor-link" href="#Data-Cleaning">¶</a></h3><blockquote>
-<p><strong>Tip</strong>: Make sure that you keep your reader informed on the steps that you are taking in your investigation. Follow every code cell, or every set of related code cells, with a markdown cell to describe to the reader what was found in the preceding cell(s). Try to make it so that the reader can then understand what they will be seeing in the following cell(s).</p>
-</blockquote>
+<h3 id="Data-Cleaning">Data Cleaning<a class="anchor-link" href="#Data-Cleaning">¶</a></h3>
 </div>
 </div>
 </div>
@@ -7982,7 +7965,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2029]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [39]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># After discussing the structure of the data and any problems that need to be</span>
@@ -8000,7 +7983,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2029]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[39]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8126,7 +8109,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2031]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [40]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">duplicated_rows</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()]</span> <span class="c1"># obtains duplicated rows ONLY</span>
@@ -8197,7 +8180,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2032]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [41]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">())</span> <span class="c1"># displays amount of duplicated rows</span>
@@ -8211,7 +8194,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2032]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[41]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>1</pre>
 </div>
@@ -8245,7 +8228,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2034]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [42]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># drops or deletes duplicated rows (MUST USE "inplace=False" TO ENSURE DATA FRAME IS MODIFIED)</span>
@@ -8260,7 +8243,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2034]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[42]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8403,13 +8386,7 @@ dtype: int64</pre>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p><a id="eda"></a></p>
-<h2 id="Exploratory-Data-Analysis">Exploratory Data Analysis<a class="anchor-link" href="#Exploratory-Data-Analysis">¶</a></h2><blockquote>
-<p><strong>Tip</strong>: Now that you've trimmed and cleaned your data, you're ready to move on to exploration. <strong>Compute statistics</strong> and <strong>create visualizations</strong> with the goal of addressing the research questions that you posed in the Introduction section. You should compute the relevant statistics throughout the analysis when an inference is made about the data. Note that at least two or more kinds of plots should be created as part of the exploration, and you must  compare and show trends in the varied visualizations. Remember to utilize the visualizations that the pandas library already has available.</p>
-</blockquote>
-<blockquote>
-<p><strong>Tip</strong>: Investigate the stated question(s) from multiple angles. It is recommended that you be systematic with your approach. Look at one variable at a time, and then follow it up by looking at relationships between variables. You should explore at least three variables in relation to the primary question. This can be an exploratory relationship between three variables of interest, or looking at how two independent variables relate to a single dependent variable of interest. Lastly, you  should perform both single-variable (1d) and multiple-variable (2d) explorations.</p>
-</blockquote>
-<h3 id="Which-genres-are-most-popular-from-year-to-year?">Which genres are most popular from year to year?<a class="anchor-link" href="#Which-genres-are-most-popular-from-year-to-year?">¶</a></h3>
+<h2 id="Exploratory-Data-Analysis">Exploratory Data Analysis<a class="anchor-link" href="#Exploratory-Data-Analysis">¶</a></h2><h3 id="Which-genres-are-most-popular-from-year-to-year?">Which genres are most popular from year to year?<a class="anchor-link" href="#Which-genres-are-most-popular-from-year-to-year?">¶</a></h3>
 </div>
 </div>
 </div>
@@ -8429,7 +8406,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2035]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [43]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Use this, and more code cells, to explore your data. Don't forget to add</span>
@@ -8494,7 +8471,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2036]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [44]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_genre_popularity_comparison_1</span> <span class="c1"># displays genre popularity dataframe for first comparison</span>
@@ -8508,7 +8485,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2036]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[44]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8663,7 +8640,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2037]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [45]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_genre_popularity_comparison_2</span> <span class="c1"># displays genre popularity dataframe for second comparison</span>
@@ -8677,7 +8654,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2037]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[45]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8832,7 +8809,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2038]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [46]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_genre_popularity_comparison_3</span> <span class="c1"># displays genre popularity dataframe for third comparison</span>
@@ -8846,7 +8823,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2038]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[46]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -9001,7 +8978,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2039]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [47]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Use this, and more code cells, to explore your data. Don't forget to add</span>
@@ -9044,7 +9021,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2040]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [48]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">index_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Action'</span><span class="p">,</span> <span class="s1">'Adventure'</span><span class="p">,</span> <span class="s1">'Animation'</span><span class="p">,</span> <span class="s1">'Comedy'</span><span class="p">,</span> <span class="s1">'Crime'</span><span class="p">,</span> <span class="s1">'Drama'</span><span class="p">,</span> <span class="s1">'Documentary'</span><span class="p">,</span> <span class="s1">'Family'</span><span class="p">,</span> <span class="s1">'Fantasy'</span><span class="p">,</span> <span class="s1">'Foreign'</span><span class="p">,</span> <span class="s1">'History'</span><span class="p">,</span> <span class="s1">'Horror'</span><span class="p">,</span> <span class="s1">'Music'</span><span class="p">,</span> <span class="s1">'Mystery'</span><span class="p">,</span> <span class="s1">'Romance'</span><span class="p">,</span> <span class="s1">'Science Fiction'</span><span class="p">,</span> <span class="s1">'Thriller'</span><span class="p">,</span> 
@@ -9082,7 +9059,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2041]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [49]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Booleans Must be created this way because Booleans Are Held In The Form Of SERIES VALUES</span>
@@ -9139,7 +9116,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2042]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [50]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Booleans Must be created this way because Booleans Are Held In The Form Of SERIES VALUES</span>
@@ -9196,7 +9173,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2043]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [51]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Booleans Must be created this way because Booleans Are Held In The Form Of SERIES VALUES</span>
@@ -9253,7 +9230,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2044]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [52]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Booleans Must be created this way because Booleans Are Held In The Form Of SERIES VALUES</span>
@@ -9310,30 +9287,30 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2045]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [53]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Genre Popularites Must be accessed &amp; inputted into genre popularity Holders this way because Genre Popularites Are Held In The Form Of SERIES VALUES</span>
 
-<span class="n">action_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">action_genre_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Action</span>
-<span class="n">adventure_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adventure_genre_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Adventure</span>
-<span class="n">animation_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">animation_genre_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Animation</span>
-<span class="n">comedy_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">comedy_genre_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Comedy</span>
-<span class="n">crime_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">crime_genre_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Crime</span>
-<span class="n">drama_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">drama_genre_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Drama</span>
-<span class="n">documentary_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">documentary_genre_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Documentary</span>
-<span class="n">family_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">family_genre_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Family</span>
-<span class="n">fantasy_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">fantasy_genre_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Fantasy</span>
-<span class="n">foreign_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">foreign_genre_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Foreign</span>
-<span class="n">history_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">history_genre_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is History</span>
-<span class="n">horror_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">horror_genre_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Horror</span>
-<span class="n">music_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">music_genre_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Music</span>
-<span class="n">mystery_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mystery_genre_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Mystery</span>
-<span class="n">romance_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">romance_genre_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Romance</span>
-<span class="n">science_fiction_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">science_fiction_genre_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Science Fiction</span>
-<span class="n">thriller_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">thriller_genre_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Thriller</span>
-<span class="n">TV_movie_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">TV_movie_genre_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is TV Movie</span>
-<span class="n">war_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">war_genre_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is War</span>
+<span class="n">action_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">action_boolean_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Action</span>
+<span class="n">adventure_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adventure_boolean_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Adventure</span>
+<span class="n">animation_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">animation_boolean_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Animation</span>
+<span class="n">comedy_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">comedy_boolean_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Comedy</span>
+<span class="n">crime_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">crime_boolean_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Crime</span>
+<span class="n">drama_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">drama_boolean_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Drama</span>
+<span class="n">documentary_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">documentary_boolean_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Documentary</span>
+<span class="n">family_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">family_boolean_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Family</span>
+<span class="n">fantasy_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">fantasy_boolean_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Fantasy</span>
+<span class="n">foreign_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">foreign_boolean_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Foreign</span>
+<span class="n">history_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">history_boolean_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is History</span>
+<span class="n">horror_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">horror_boolean_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Horror</span>
+<span class="n">music_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">music_boolean_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Music</span>
+<span class="n">mystery_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mystery_boolean_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Mystery</span>
+<span class="n">romance_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">romance_boolean_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Romance</span>
+<span class="n">science_fiction_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">science_fiction_boolean_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Science Fiction</span>
+<span class="n">thriller_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">thriller_boolean_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Thriller</span>
+<span class="n">TV_movie_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">TV_movie_boolean_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is TV Movie</span>
+<span class="n">war_popularity_2008</span> <span class="o">=</span> <span class="n">df_2008</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">war_boolean_2008</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is War</span>
 </pre></div>
 </div>
 </div>
@@ -9367,30 +9344,30 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2046]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [54]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Genre Popularites Must be accessed &amp; inputted into genre popularity Holders this way because Genre Popularites Are Held In The Form Of SERIES VALUES</span>
 
-<span class="n">action_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">action_genre_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Action</span>
-<span class="n">adventure_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adventure_genre_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Adventure</span>
-<span class="n">animation_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">animation_genre_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Animation</span>
-<span class="n">comedy_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">comedy_genre_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Comedy</span>
-<span class="n">crime_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">crime_genre_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Crime</span>
-<span class="n">drama_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">drama_genre_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Drama</span>
-<span class="n">documentary_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">documentary_genre_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Documentary</span>
-<span class="n">family_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">family_genre_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Family</span>
-<span class="n">fantasy_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">fantasy_genre_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Fantasy</span>
-<span class="n">foreign_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">foreign_genre_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Foreign</span>
-<span class="n">history_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">history_genre_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is History</span>
-<span class="n">horror_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">horror_genre_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Horror</span>
-<span class="n">music_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">music_genre_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Music</span>
-<span class="n">mystery_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mystery_genre_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Mystery</span>
-<span class="n">romance_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">romance_genre_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Romance</span>
-<span class="n">science_fiction_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">science_fiction_genre_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Science Fiction</span>
-<span class="n">thriller_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">thriller_genre_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Thriller</span>
-<span class="n">TV_movie_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">TV_movie_genre_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is TV Movie</span>
-<span class="n">war_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">war_genre_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is War</span>
+<span class="n">action_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">action_boolean_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Action</span>
+<span class="n">adventure_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adventure_boolean_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Adventure</span>
+<span class="n">animation_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">animation_boolean_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Animation</span>
+<span class="n">comedy_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">comedy_boolean_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Comedy</span>
+<span class="n">crime_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">crime_boolean_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Crime</span>
+<span class="n">drama_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">drama_boolean_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Drama</span>
+<span class="n">documentary_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">documentary_boolean_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Documentary</span>
+<span class="n">family_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">family_boolean_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Family</span>
+<span class="n">fantasy_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">fantasy_boolean_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Fantasy</span>
+<span class="n">foreign_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">foreign_boolean_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Foreign</span>
+<span class="n">history_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">history_boolean_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is History</span>
+<span class="n">horror_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">horror_boolean_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Horror</span>
+<span class="n">music_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">music_boolean_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Music</span>
+<span class="n">mystery_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mystery_boolean_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Mystery</span>
+<span class="n">romance_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">romance_boolean_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Romance</span>
+<span class="n">science_fiction_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">science_fiction_boolean_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Science Fiction</span>
+<span class="n">thriller_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">thriller_boolean_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Thriller</span>
+<span class="n">TV_movie_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">TV_movie_boolean_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is TV Movie</span>
+<span class="n">war_popularity_2009</span> <span class="o">=</span> <span class="n">df_2009</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">war_boolean_2009</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is War</span>
 </pre></div>
 </div>
 </div>
@@ -9424,30 +9401,30 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2047]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [55]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Genre Popularites Must be accessed &amp; inputted into genre popularity Holders this way because Genre Popularites Are Held In The Form Of SERIES VALUES</span>
 
-<span class="n">action_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">action_genre_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Action</span>
-<span class="n">adventure_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adventure_genre_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Adventure</span>
-<span class="n">animation_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">animation_genre_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Animation</span>
-<span class="n">comedy_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">comedy_genre_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Comedy</span>
-<span class="n">crime_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">crime_genre_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Crime</span>
-<span class="n">drama_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">drama_genre_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Drama</span>
-<span class="n">documentary_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">documentary_genre_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Documentary</span>
-<span class="n">family_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">family_genre_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Family</span>
-<span class="n">fantasy_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">fantasy_genre_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Fantasy</span>
-<span class="n">foreign_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">foreign_genre_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Foreign</span>
-<span class="n">history_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">history_genre_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is History</span>
-<span class="n">horror_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">horror_genre_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Horror</span>
-<span class="n">music_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">music_genre_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Music</span>
-<span class="n">mystery_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mystery_genre_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Mystery</span>
-<span class="n">romance_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">romance_genre_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Romance</span>
-<span class="n">science_fiction_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">science_fiction_genre_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Science Fiction</span>
-<span class="n">thriller_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">thriller_genre_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Thriller</span>
-<span class="n">TV_movie_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">TV_movie_genre_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is TV Movie</span>
-<span class="n">war_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">war_genre_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is War</span>
+<span class="n">action_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">action_boolean_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Action</span>
+<span class="n">adventure_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adventure_boolean_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Adventure</span>
+<span class="n">animation_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">animation_boolean_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Animation</span>
+<span class="n">comedy_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">comedy_boolean_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Comedy</span>
+<span class="n">crime_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">crime_boolean_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Crime</span>
+<span class="n">drama_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">drama_boolean_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Drama</span>
+<span class="n">documentary_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">documentary_boolean_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Documentary</span>
+<span class="n">family_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">family_boolean_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Family</span>
+<span class="n">fantasy_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">fantasy_boolean_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Fantasy</span>
+<span class="n">foreign_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">foreign_boolean_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Foreign</span>
+<span class="n">history_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">history_boolean_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is History</span>
+<span class="n">horror_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">horror_boolean_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Horror</span>
+<span class="n">music_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">music_boolean_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Music</span>
+<span class="n">mystery_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mystery_boolean_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Mystery</span>
+<span class="n">romance_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">romance_boolean_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Romance</span>
+<span class="n">science_fiction_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">science_fiction_boolean_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Science Fiction</span>
+<span class="n">thriller_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">thriller_boolean_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Thriller</span>
+<span class="n">TV_movie_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">TV_movie_boolean_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is TV Movie</span>
+<span class="n">war_popularity_2010</span> <span class="o">=</span> <span class="n">df_2010</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">war_boolean_2010</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is War</span>
 </pre></div>
 </div>
 </div>
@@ -9481,30 +9458,30 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2048]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [56]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Genre Popularites Must be accessed &amp; inputted into genre popularity Holders this way because Genre Popularites Are Held In The Form Of SERIES VALUES</span>
 
-<span class="n">action_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">action_genre_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Action</span>
-<span class="n">adventure_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adventure_genre_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Adventure</span>
-<span class="n">animation_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">animation_genre_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Animation</span>
-<span class="n">comedy_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">comedy_genre_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Comedy</span>
-<span class="n">crime_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">crime_genre_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Crime</span>
-<span class="n">drama_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">drama_genre_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Drama</span>
-<span class="n">documentary_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">documentary_genre_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Documentary</span>
-<span class="n">family_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">family_genre_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Family</span>
-<span class="n">fantasy_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">fantasy_genre_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Fantasy</span>
-<span class="n">foreign_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">foreign_genre_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Foreign</span>
-<span class="n">history_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">history_genre_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is History</span>
-<span class="n">horror_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">horror_genre_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Horror</span>
-<span class="n">music_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">music_genre_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Music</span>
-<span class="n">mystery_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mystery_genre_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Mystery</span>
-<span class="n">romance_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">romance_genre_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Romance</span>
-<span class="n">science_fiction_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">science_fiction_genre_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Science Fiction</span>
-<span class="n">thriller_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">thriller_genre_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Thriller</span>
-<span class="n">TV_movie_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">TV_movie_genre_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is TV Movie</span>
-<span class="n">war_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">war_genre_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is War</span>
+<span class="n">action_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">action_boolean_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Action</span>
+<span class="n">adventure_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">adventure_boolean_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Adventure</span>
+<span class="n">animation_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">animation_boolean_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Animation</span>
+<span class="n">comedy_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">comedy_boolean_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Comedy</span>
+<span class="n">crime_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">crime_boolean_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Crime</span>
+<span class="n">drama_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">drama_boolean_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Drama</span>
+<span class="n">documentary_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">documentary_boolean_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Documentary</span>
+<span class="n">family_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">family_boolean_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># access Popularity if movie is Family</span>
+<span class="n">fantasy_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">fantasy_boolean_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Fantasy</span>
+<span class="n">foreign_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">foreign_boolean_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Foreign</span>
+<span class="n">history_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">history_boolean_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is History</span>
+<span class="n">horror_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">horror_boolean_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Horror</span>
+<span class="n">music_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">music_boolean_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Music</span>
+<span class="n">mystery_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mystery_boolean_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Mystery</span>
+<span class="n">romance_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">romance_boolean_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Romance</span>
+<span class="n">science_fiction_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">science_fiction_boolean_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Science Fiction</span>
+<span class="n">thriller_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">thriller_boolean_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is Thriller</span>
+<span class="n">TV_movie_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">TV_movie_boolean_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is TV Movie</span>
+<span class="n">war_popularity_2011</span> <span class="o">=</span> <span class="n">df_2011</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">war_boolean_2011</span><span class="o">==</span><span class="kc">True</span><span class="p">,</span> <span class="s1">'popularity'</span><span class="p">]</span> <span class="c1"># accesses Popularity if movie is War</span>
 </pre></div>
 </div>
 </div>
@@ -9538,7 +9515,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2049]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [57]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_genre_popularity_2008_Series_values</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'Genre Popularity 2008 Series Values'</span> <span class="p">:</span> <span class="p">[</span><span class="n">action_popularity_2008</span><span class="p">,</span> <span class="n">adventure_popularity_2008</span><span class="p">,</span> <span class="n">animation_popularity_2008</span><span class="p">,</span> <span class="n">comedy_popularity_2008</span><span class="p">,</span> 
@@ -9594,7 +9571,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2050]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [58]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">genre_popularity_sum</span><span class="p">(</span><span class="n">df_compare</span><span class="p">,</span> <span class="n">genre_popularity_Series_holder</span><span class="p">,</span> <span class="n">index_num</span><span class="p">,</span> <span class="n">col_year</span><span class="p">):</span> <span class="c1"># Function for finding sum of genre popularity</span>
@@ -9632,7 +9609,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2052]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [60]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">index_genre_num</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># initalizes 'index_for_main_df' to "0" (MUST USE THIS ---&gt; using for loop will add One genre sum to ENTIRE column)</span>
@@ -9703,7 +9680,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2053]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [61]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_genre_popularity_comparison_1</span> <span class="c1"># displays genre popularity dataframe for first comparison</span>
@@ -9717,7 +9694,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2053]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[61]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -9872,7 +9849,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2054]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [65]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_genre_popularity_comparison_2</span> <span class="c1"># displays genre popularity dataframe for second comparison</span>
@@ -9886,7 +9863,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2054]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[65]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -10041,7 +10018,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2055]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [66]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_genre_popularity_comparison_3</span> <span class="c1"># displays genre popularity dataframe for third comparison</span>
@@ -10055,7 +10032,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2055]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[66]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -10210,7 +10187,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2056]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [67]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_genre_popularity_comparison_1</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">rot</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">19.5</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span> <span class="c1"># creates &amp; displays bar graph for "df_genre_popularity_comparison_1" ("rot=90" ensures x-axis label is vertical, so labels can be read)</span>
@@ -10227,7 +10204,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2056]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[67]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>Text(0.5, 1.0, 'Genre Popularity from 2008 to 2009')</pre>
 </div>
@@ -10268,7 +10245,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2057]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [68]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_genre_popularity_comparison_2</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">rot</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">19.5</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span> <span class="c1"># creates &amp; displays bar graph for "df_genre_popularity_comparison_2" ("rot=90" ensures x-axis label is vertical, so labels can be read)</span>
@@ -10285,7 +10262,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2057]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[68]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>Text(0.5, 1.0, 'Genre Popularity from 2009 to 2010')</pre>
 </div>
@@ -10326,7 +10303,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [69]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_genre_popularity_comparison_3</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">rot</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">19.5</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span> <span class="c1"># creates &amp; displays bar graph for "df_genre_popularity_comparison_3" ("rot=90" ensures x-axis label is vertical, so labels can be read)</span>
@@ -10343,9 +10320,15 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[ ]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[69]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>Text(0.5, 1.0, 'Genre Popularity from 2010 to 2011')</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedImage jp-OutputArea-output" tabindex="0">
+<img alt="No description has been provided for this image" class="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABjMAAAOuCAYAAABCBOVpAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjguNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8fJSN1AAAACXBIWXMAAA9hAAAPYQGoP6dpAACqLElEQVR4nOzde5iVZb038O/AcHYYRYWBREAly1MpGokWmIonNGKnpeZZs9CUrUaSJkMpGJXy5jHLLXgg7eApLZMSKTe6N4pnDbcFiltHTHFAQRBc7x++zOs0oDIsmAf5fK7ruS7X/dzrfn7PvQbF+a77uStKpVIpAAAAAAAABdWqpQsAAAAAAAB4P8IMAAAAAACg0IQZAAAAAABAoQkzAAAAAACAQhNmAAAAAAAAhSbMAAAAAAAACk2YAQAAAAAAFJowAwAAAAAAKDRhBgAAAAAAUGjCDAAAWsRjjz2WE044IVtvvXU6dOiQDh06pG/fvjn55JPz4IMPtnR5zTZo0KBUVFQ0HB06dMinPvWpTJgwIe+8805Ll5ckqaioSG1tbVnHnDNnTioqKjJx4sSGtunTp6e2tjavv/56Wa+VJOeee2623HLLVFZWZuONNy77+OX0i1/8IkOHDk3v3r3ToUOHbLPNNvnmN7+Zl156aaX9b7zxxnz6059O+/bt06NHj4wYMSJvvPFGoz4LFy7MyJEjM3jw4Gy++eYf+JnOnDkz++yzTzbaaKNsvPHGGTZsWP7xj398qPrHjh2bW2+99cPe7oeyYMGCXHDBBRk0aFBqamqy0UYbZccdd8wPf/jDvPXWW036v/322xkzZkx69+6ddu3a5ROf+EQuueSSJv2efPLJDB8+PLvvvns6deqUioqK3HvvvSut4dprr81Xv/rVbLvttmnVqlV69+5d1nsEAKC8hBkAAKxzP/vZz9KvX7/813/9V04//fTccccdufPOOzNixIg8+eST2W233fL3v/+9pctstq222ir3339/7r///tx000352Mc+ln//93/PqFGjWrq0taZ79+65//77c9BBBzW0TZ8+PWPGjCl7mHHbbbflggsuyNFHH51p06blT3/6U1nHL7fRo0dno402ytixY3PXXXdl5MiRueOOO9KvX7+8/PLLjfrecMMNOfzww7PbbrvlD3/4Q0aPHp2JEydm2LBhjfq9+uqrueqqq7JkyZIMHTr0fa//t7/9LYMGDcrSpUvzq1/9Kv/xH/+RZ555Jp/73OfyyiuvfGD9ayPMeP755zNhwoTssssuueqqq3L77bfny1/+cmprazNkyJCUSqVG/YcPH55x48bllFNOyR//+Md86Utfyumnn56xY8c26vfggw/m1ltvTZcuXbL33nu/bw3XXXddnnzyyXzmM5/J1ltvXdb7AwBgLSgBAMA6dN9995VatWpVOvjgg0tLlixZaZ9f/epXpf/93/9dx5WVSosWLVrjMQYOHFjafvvtG7UtXbq0tNVWW5U6duxYWrp06RpfY00lKY0ePbosYy1btqz01ltvrfTcj370o1KS0uzZs8tyrRXOP//8UpLSyy+//IF9y/GZrqmV1TljxoxSktIPfvCDhrZly5aVunfvXho8eHCjvjfccEMpSen3v/99Q9s777xTeuedd0qlUqn0yiuvvO9neuihh5Y222yzUn19fUPbnDlzSm3atCmNHDnyA+vv1KlT6ZhjjvnAfqvjjTfeKL3xxhtN2lf8zPz1r39taHviiSdKFRUVpbFjxzbqe9JJJ5U6dOhQevXVVxvali9f3vDPv/71r0tJSlOnTl1pDe/te9BBB5V69erVzLsBAGBdsDIDAIB1auzYsWndunV+9rOfpW3btivtc+ihh6ZHjx6N2h588MEccsgh6dKlS9q3b5+dd945v/rVrxr1mThxYioqKjJ16tR885vfzGabbZZNN900w4YNy4svvtiob+/evTNkyJDcfPPN2XnnndO+ffuMGTMmSVJXV5eTTz45W2yxRdq2bZs+ffpkzJgxWbZsWbPuuU2bNunXr18WLVrU8E34J554Il/84hezySabpH379vn0pz+dSZMmNXrfvffem4qKilx//fU544wzUlNTkw4dOmTgwIF5+OGHG/UdNGhQBg0a1OTaxx577Ac+PueVV17J8OHDs91222WjjTZK165d84UvfCF//etfG/Vb8Sip8ePH5/zzz0+fPn3Srl27TJ06tcljpmpra/Ptb387SdKnT5+Gx27de++9OeGEE9KlS5csWrSoSS1f+MIXsv3226+y1t69e+fcc89NknTr1q3R45Xe7zNdnfmePHlyvvOd76R79+7ZaKONcvDBB+fll1/OwoUL8/Wvfz2bbbZZNttssxx33HFNHv+0Ml27dm3S1q9fv7Ru3Tpz585taHvggQfy0ksv5bjjjmvU99BDD81GG22UW265paFtxXx+kGXLluWOO+7Iv/3bv6Vz584N7b169cpee+3VaMyVqaioyJtvvplJkyY1XPO9P2cfZl5XplOnTunUqVOT9s985jNJ0mhebr311pRKpSbzctxxx2Xx4sW56667Gtpatfrw/4u7On0BAGh5lS1dAAAAG47ly5dn6tSp2XXXXdO9e/cP/b6pU6dm//33T//+/XPllVemuro6N954Y77yla9k0aJFOfbYYxv1P/HEE3PQQQdl8uTJmTt3br797W/na1/7Wu65555G/WbOnJmnn3465557bvr06ZNOnTqlrq4un/nMZ9KqVaucd9552XrrrXP//ffn/PPPz5w5c3LNNdc0697//ve/p7KyMptssklmzZqVAQMGpGvXrvnpT3+aTTfdNNdff32OPfbYvPzyyxk5cmSj9373u9/NLrvskl/84hepr69PbW1tBg0alIcffjhbbbVVs+p5r9deey3Ju49DqqmpyRtvvJFbbrklgwYNyp///OcmIclPf/rTfPzjH8+Pf/zjdO7cOX379m0y5oknnpjXXnstl1xySW6++eaGz3u77bZLly5d8h//8R+ZPHlyTjzxxIb3PPXUU5k6dWouu+yyVdZ6yy235LLLLsvVV1+du+66K9XV1dliiy0azq/sM23OfO+1116ZOHFi5syZk7POOiuHH354Kisr86lPfSq//OUv8/DDD+e73/1uqqqq8tOf/nS153zatGlZvnx5o+DmiSeeSJLstNNOjfq2adMmn/jEJxrOr46///3vWbx4cZMxV1xnypQpeeutt9K+ffuVvv/+++/PF77whey111753ve+lyQNocjqzuuHseLP6L/Oy+abb56ampom9a84DwDAR58wAwCAdeaf//xnFi9enF69ejU5t3z58kbPyW/dunXDN8+HDx+e7bffPvfcc08qK9/9K+x+++2Xf/7zn/nud7+bo48+utG3rPfff/9Gv2B+7bXXMnLkyNTV1TX6hei8efPy1FNP5eMf/3hD2ze+8Y3Mnz8/Tz75ZLbccsskyd57750OHTrkrLPOyre//e1st912H3ivK1ZxvPLKK/npT3+amTNn5tBDD02HDh1SW1ubpUuXZurUqenZs2eS5MADD8zrr7+eMWPG5OSTT051dXXDWJtvvnluueWWhvnYc88907dv34wbNy4///nPP7CWD7Ltttvm8ssvb3i9fPny7LfffpkzZ05++tOfNgkz2rdvnz/+8Y9p06ZNQ9ucOXMa9dliiy0a5m/nnXdutDpkp512ysCBA3PZZZc1CjMuvfTSdO7cOUcfffQqa915550bwot+/fpls802a3R+ZZ/p4YcfvlrzvdNOOzUKrf72t79lwoQJOe200/KjH/0oSbLvvvvm/vvvzw033LDaYcbChQszfPjw9OzZM8cff3xD+6uvvpok6dKlS5P3dOnSpckcfxgfNGapVMr8+fNXGS5+9rOfTatWrbL55pvns5/9bKNzq/tz/EEee+yxjB8/Pl/60pcahS+vvvrqSuvv1KlT2rZt23CPAAB8tFlXCwBAIfTr1y9t2rRpOH7yk58kSZ599tn87W9/y5FHHpnk3ZBgxXHggQfmpZdeyqxZsxqNdcghhzR6veIXo88991yT9vf+0jtJ7rjjjuy1117p0aNHo2sdcMABSd79Rv0HefLJJxvuo0ePHvnJT36SI488siF4uOeee7L33ns3/AJ4hWOPPTaLFi3K/fff36j9iCOOaPRIoV69emXAgAGZOnXqB9byYV155ZXZZZdd0r59+1RWVqZNmzb585//nKeffrpJ30MOOaRRkNEcp59+eh555JH853/+Z5JkwYIFue6663LMMcdko402ava4K/tMV3e+hwwZ0uj1Jz/5ySRptLn5ivbXXnvtQz1qaoW33norw4YNy3PPPZdf//rXK73XVT0+6sM8VmpV3u+9zR13def1/cyZMydDhgxJz54984tf/GK1alyTeQEAYP0hzAAAYJ3ZbLPN0qFDhyahQpJMnjw5M2bMyO23396o/eWXX06SnHXWWY3CjjZt2mT48OFJ3l3x8V6bbrppo9ft2rVLkixevLhR+8q+jf7yyy/nd7/7XZNrrXjszb9ea2W23nrrzJgxIw8++GCeeOKJvP7667n++usbvqX+6quvrvTaK/YJ+ddvmv/r43VWtJXrG+kXXXRRvvnNb6Z///757W9/mwceeCAzZszI/vvv32TOkpXP2+r64he/mN69ezc8UmrixIl58803c8opp6zRuCurbXXn+19XAazY22VV7W+99daHqm3JkiX50pe+lPvuuy+33357+vfv3+j8ip/blX2ur7322kpXJ3yQDxqzoqIiG2+88WqPu2LM1ZnXVXnuueey1157pbKyMn/+85+b3Oemm2660rHefPPNLF26tFnzAgDA+sdjpgAAWGdat26dL3zhC7n77rvz0ksvNfpF6IpHN/3ro3RWPEZo1KhRGTZs2ErH3XbbbZtVz8q+0b3ZZptlp512ygUXXLDS9/zrxuQr0759++y6666rPL/pppvmpZdeatK+YpPyf310Ul1dXZO+dXV1jUKb9u3bp76+vkm/DxO+XH/99Rk0aFCuuOKKRu0LFy5caf9yfBO+VatWOeWUU/Ld7343P/nJT3L55Zdn7733bvZn+X61re58rw1LlizJ0KFDM3Xq1Nx2223Ze++9m/TZcccdkySPP/54o0eZLVu2LH/7299y+OGHr/Z1t95663To0CGPP/54k3OPP/54ttlmm1Xul/FByjGvzz33XAYNGpRSqZR777230f4nK+y444658cYbmzwmbsU97bDDDs2qHwCA9YuVGQAArFOjRo3K8uXL841vfCNvv/32B/bfdttt07dv3zz66KPZddddV3pUVVWVrb4hQ4bkiSeeyNZbb73Sa32YMOOD7L333rnnnnsafum7wrXXXpuOHTs22Zvgl7/8ZaP9RJ577rlMnz690V4WvXv3zjPPPJMlS5Y0tL366quZPn36B9ZTUVHRsHplhccee2y1HhO0MqtaEbPCiSeemLZt2+bII4/MrFmzcuqpp67R9VZldee73FasyLjnnnvy29/+Nvvtt99K+/Xv3z/du3fPxIkTG7X/5je/yRtvvLHKMO/9VFZW5uCDD87NN9/cKJx6/vnnM3Xq1A81Zrt27Vb6Ga7pvD7//PMZNGhQli9fnnvuuWele+kk767iqaioyKRJkxq1T5w4MR06dMj+++//gfcAAMD6z8oMAADWqT322COXXXZZvvWtb2WXXXbJ17/+9Wy//fZp1apVXnrppfz2t79NknTu3LnhPT/72c9ywAEHZL/99suxxx6bj33sY3nttdfy9NNPZ+bMmfn1r39dtvq+//3vZ8qUKRkwYEBOO+20bLvttnnrrbcyZ86c/P73v8+VV1650m+Pr47Ro0c37M1x3nnnpUuXLrnhhhty5513Zvz48U02TZ43b16+9KUv5aSTTkp9fX1Gjx6d9u3bZ9SoUQ19jjrqqPzsZz/L1772tZx00kl59dVXM378+EbzuCpDhgzJD37wg4wePToDBw7MrFmz8v3vfz99+vRp2Mi8OVasNPg//+f/5JhjjkmbNm2y7bbbNoRPG2+8cY4++uhcccUV6dWrVw4++OBmX+v9rO58l9uXv/zl/OEPf8g555yTTTfdNA888EDDuc6dOzeswmjdunXGjx+fo446KieffHIOP/zw/M///E9GjhyZfffdt8kv7f/whz/kzTffbAgpnnrqqfzmN79J8u5G3B07dkySjBkzJrvttluGDBmSs88+O2+99VbOO++8bLbZZjnzzDM/sP4dd9wx9957b373u9+le/fuqaqqyrbbbrtG8zpv3rzstddeeemll3L11Vdn3rx5mTdvXsP5LbbYouHP2fbbb58TTjgho0ePTuvWrbPbbrvl7rvvzlVXXZXzzz+/0WOmFi1alN///vdJ0jDP06ZNyz//+c906tSpYe+bFfP11FNPJXl3pdOiRYsa5m+77bZrtDoGAIACKAEAQAt45JFHSscdd1ypT58+pXbt2pXat29f2mabbUpHH3106c9//nOT/o8++mjpsMMOK3Xt2rXUpk2bUk1NTekLX/hC6corr2zoc80115SSlGbMmNHovVOnTi0lKU2dOrWhrVevXqWDDjpopbW98sorpdNOO63Up0+fUps2bUpdunQp9evXr3TOOeeU3njjjfe9r4EDB5a23377D7z/xx9/vHTwwQeXqqurS23bti196lOfKl1zzTUrrfu6664rnXbaaaXNN9+81K5du9LnPve50oMPPthkzEmTJpU++clPltq3b1/abrvtSjfddFPpmGOOKfXq1atRvySl0aNHN7xesmRJ6ayzzip97GMfK7Vv3760yy67lG699dYm7509e3YpSelHP/pRk2uvOPev9zBq1KhSjx49Sq1atWryGZRKpdK9995bSlK68MILP3DOVhg9enQpSemVV15p1P5+n+nqzPevf/3rRu2r+rlaVR3/Kskqj4EDBzbpP3ny5NJOO+1Uatu2bammpqZ02mmnlRYuXNikX69evVY57uzZsxv1ffDBB0t77713qWPHjqXOnTuXhg4dWnr22Wfft+4VHnnkkdIee+xR6tixY5OaP8y8rsyKuV7V8d6fz1KpVFq6dGlp9OjRpS233LLUtm3b0sc//vHST3/60ybjrvg5XNnxr38OVnx+H+b6AAC0vIpS6T3r1QEAgMK49957s9dee+XXv/51vvzlL7d0OWvFmWeemSuuuCJz585tsnE7AADACh4zBQAArHMPPPBAnnnmmVx++eU5+eSTBRkAAMD7EmYAAADr3O67756OHTtmyJAhOf/881u6HAAAoOA8ZgoAAAAAACi0Vi1dAAAAAAAAwPsRZgAAAAAAAIUmzAAAAAAAAArNBuBJ3nnnnbz44oupqqpKRUVFS5cDAAAAAAAfeaVSKQsXLkyPHj3SqtX7r70QZiR58cUX07Nnz5YuAwAAAAAANjhz587NFlts8b59hBlJqqqqkrw7YZ07d27hagAAAAAA4KNvwYIF6dmzZ8Pv6N+PMCNpeLRU586dhRkAAAAAALAOfZjtH2wADgAAAAAAFJowAwAAAAAAKDRhBgAAAAAAUGj2zAAAAAAAgPdYvnx53n777ZYuY73XunXrVFZWfqg9MT6IMAMAAAAAAP6fN954Iy+88EJKpVJLl/KR0LFjx3Tv3j1t27Zdo3GEGQAAAAAAkHdXZLzwwgvp2LFjNt9887KsKNhQlUqlLF26NK+88kpmz56dvn37plWr5u98IcwAAAAAAIAkb7/9dkqlUjbffPN06NChpctZ73Xo0CFt2rTJc889l6VLl6Z9+/bNHssG4AAAAAAA8B5WZJTPmqzGaDROWUYBAAAAAABYS4QZAAAAAABAodkzAwAAAAAA3kfvs+9cp9ebc+FB6/R66wMrMwAAAAAAYD02bty47LbbbqmqqkrXrl0zdOjQzJo1q1GfUqmU2tra9OjRIx06dMigQYPy5JNPNupz1VVXZdCgQencuXMqKiry+uuvN7nW/Pnzc9RRR6W6ujrV1dU56qijVtqv3IQZAAAAAACwHps2bVpOOeWUPPDAA5kyZUqWLVuWwYMH580332zoM378+Fx00UW59NJLM2PGjNTU1GTffffNwoULG/osWrQo+++/f7773e+u8lpHHHFEHnnkkdx1112566678sgjj+Soo45aq/eXeMwUAAAAAACs1+66665Gr6+55pp07do1Dz30UD7/+c+nVCplwoQJOeecczJs2LAkyaRJk9KtW7dMnjw5J598cpJkxIgRSZJ77713pdd5+umnc9ddd+WBBx5I//79kyQ///nPs/vuu2fWrFnZdttt184NxsoMAAAAAAD4SKmvr0+SdOnSJUkye/bs1NXVZfDgwQ192rVrl4EDB2b69Okfetz7778/1dXVDUFGknz2s59NdXX1ao3THMIMAAAAAAD4iCiVSjnjjDOy5557ZocddkiS1NXVJUm6devWqG+3bt0azn0YdXV16dq1a5P2rl27rtY4zeExUwAAAAAA8BFx6qmn5rHHHst9993X5FxFRUWj16VSqUnbB1lZ/+aMs7qszAAAAAAAgI+Ab33rW7n99tszderUbLHFFg3tNTU1SdJk9cS8efOarNZ4PzU1NXn55ZebtL/yyiurNU5zCDMAAAAAAGA9ViqVcuqpp+bmm2/OPffckz59+jQ636dPn9TU1GTKlCkNbUuXLs20adMyYMCAD32d3XffPfX19fnv//7vhrb/+q//Sn19/WqN0xweMwUAAAAAAOuxU045JZMnT85tt92WqqqqhhUY1dXV6dChQyoqKjJixIiMHTs2ffv2Td++fTN27Nh07NgxRxxxRMM4dXV1qaury7PPPpskefzxx1NVVZUtt9wyXbp0ySc/+cnsv//+Oemkk/Kzn/0sSfL1r389Q4YMybbbbrtW71GYAQAAAAAA72POhQe1dAnv64orrkiSDBo0qFH7Nddck2OPPTZJMnLkyCxevDjDhw/P/Pnz079//9x9992pqqpq6H/llVdmzJgxDa8///nPNxnnhhtuyGmnnZbBgwcnSQ455JBceumla+nO/r+KUqlUWutXKbgFCxakuro69fX16dy5c0uXAwAAAABAC3jrrbcye/bs9OnTJ+3bt2/pcj4S3m9OV+d38/bMAAAAAAAACk2YAQAAAAAAFJowAwAAAAAAKDRhBgAAAAAAUGjCDAAAAAAAoNCEGQAAAAAAQKEJMwAAAAAAgEITZgAAAAAAAIUmzAAAAAAAAAqtsqULAAAAAACAQqutXsfXq1+311sPWJkBAAAAAADrsXHjxmW33XZLVVVVunbtmqFDh2bWrFmN+pRKpdTW1qZHjx7p0KFDBg0alCeffLJRn6uuuiqDBg1K586dU1FRkddff73JtS644IIMGDAgHTt2zMYbb7wW76oxKzMA4KOm3N8W8W0QAAAAKLRp06bllFNOyW677ZZly5blnHPOyeDBg/PUU0+lU6dOSZLx48fnoosuysSJE/Pxj388559/fvbdd9/MmjUrVVVVSZJFixZl//33z/77759Ro0at9FpLly7NoYcemt133z1XX331OrtHYQYAAAAAAKzH7rrrrkavr7nmmnTt2jUPPfRQ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AAAAIBFmAAAAAAAABSfMAAAAAAAACk2YAQAAAAAAFJowAwAAAAAAKDRhBgAAAAAAUGjCDAAAAAAAoNCEGQAAAAAAQKEJMwAAAAAAgEITZgAAAAAAAIUmzAAAAAAAAApNmAEAAAAAABSaMAMAAAAAACg0YQYAAAAAAFBowgwAAAAAAKDQhBkAAAAAAEChCTMAAAAAAIBCE2YAAAAAAACFJswAAAAAAAAKTZgBAAAAAAAUmjADAAAAAAAoNGEGAAAAAABQaMIMAAAAAACg0IQZAAAAAABAoQkzAAAAAACAQhNmAAAAAAAAhSbMAAAAAAAACk2YAQAAAAAAFJowAwAAAAAAKDRhBgAAAAAAUGjCDAAAAAAAoNCEGQAAAAAAQKEJMwAAAAAAgEITZgAAAAAAAIUmzAAAAAAAAApNmAEAAAAAABSaMAMAAAAAACg0YQYAAAAAAFBowgwAAAAAAKDQhBkAAAAAAEChCTMAAAAAAIBCE2YAAAAAAACFJswAAAAAAAAKTZgBAAAAAAAUmjADAAAAAAAoNGEGAAAAAABQaMIMAAAAAACg0IQZAAAAAABAoQkzAAAAAACAQhNmAAAAAAAAhSbMAAAAAAAACk2YAQAAAAAAFJowAwAAAAAAKDRhBgAAAAAAUGjCDAAAAAAAoNCEGQAAAAAAQKEJMwAAAAAAgEITZgAAAAAAAIUmzAAAAAAAAApNmAEAAAAAABSaMAMAAAAAACg0YQYAAAAAAFBowgwAAAAAAKDQhBkAAAAAAEChCTMAAAAAAIBCE2YAAAAAAACFJswAAAAAAAAKTZgBAAAAAAAUmjADAAAAAAAoNGEGAAAAAABQaMIMAAAAAACg0IQZAAAAAABAoQkzAAAAAACAQhNmAAAAAAAAhSbMAAAAAAAACk2YAQAAAAAAFJowAwAAAAAAKDRhBgAAAAAAUGjCDAAAAAAAoNCEGQAAAAAAQKEJMwAAAAAAgEITZgAAAAAAAIUmzAAAAAAAAApNmAEAAAAAABSaMAMAAAAAACg0YQYAAAAAAFBowgwAAAAAAKDQhBkAAAAAAEChCTMAAAAAAIBCE2YAAAAAAACFJswAAAAAAAAKTZgBAAAAAAAUmjADAAAAAAAoNGEGAAAAAABQaMIMAAAAAACg0IQZAAAAAABAoQkzAAAAAACAQhNmAAAAAAAAhSbMAAAAAAAACk2Y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Z+7WjPlrvqLPXalUysKFC9OjR48P7LvehxmbbbZZWrdunbq6ukbt8+bNS7du3Vb6nnbt2qVdu3aN2jbeeOO1VWLZdO7cuZA/cOsDc7dmzF/zmbs1Y/6az9ytGfPXfOZuzZi/NWP+ms/crRnz13zmbs2Yv+Yzd2vG/DWfuVsz5q/5ijx31dXVH6rfer8BeNu2bdOvX79MmTKlUfuUKVMaPXYKAAAAAABYP633KzOS5IwzzshRRx2VXXfdNbvvvnuuuuqqPP/88/nGN77R0qUBAAAAAABr6CMRZnzlK1/Jq6++mu9///t56aWXssMOO+T3v/99evXq1dKllUW7du0yevToJo/G4oOZuzVj/prP3K0Z89d85m7NmL/mM3drxvytGfPXfOZuzZi/5jN3a8b8NZ+5WzPmr/nM3Zoxf833UZq7ilKpVGrpIgAAAAAAAFZlvd8zAwAAAAAA+GgTZgAAAAAAAIUmzAAAAAAAAApNmAEAAAAAABSaMAMAAAAAoEyWLVuWysrKPPHEEy1dChug5cuXZ9q0aZk/f35Ll1J2wgw+kpYuXZpZs2Zl2bJlLV0KG5BBgwbl2muvzeLFi1u6lPXW3//+95x77rk5/PDDM2/evCTJXXfdlSeffLKFKwMASEqlUp577jl/3wM2GC+//HKOOuqo9OjRI5WVlWndunWjg5WrrKxMr169snz58pYuZb123XXXZY899kiPHj3y3HPPJUkmTJiQ2267rYUrK7bWrVtnv/32y+uvv97SpZSdMKOgXn/99dx99925/vrrc+211zY6WLVFixblhBNOSMeOHbP99tvn+eefT5KcdtppufDCC1u4uuJbvnx5rr766hxxxBHZZ5998oUvfKHRwfvr169fRo4cmZqampx00kl54IEHWrqk9cq0adOy44475r/+679y880354033kiSPPbYYxk9enQLVwesyr333tvSJay33nzzzZYugQ2UL2A0X6lUSt++ffPCCy+0dCnrrd///vf54x//2KT9j3/8Y/7whz+0QEXrD392aQnHHntsZs6cme9973v5zW9+k5tvvrnRwaqde+65GTVqVF577bWWLmW9dMUVV+SMM87IgQcemNdff70hGNp4440zYcKEli1uPbDjjjvmH//4R0uXUXYVpVKp1NJF0Njvfve7HHnkkXnzzTdTVVWVioqKhnMVFRX+Jfg+Tj/99Pznf/5nJkyYkP333z+PPfZYttpqq9x+++0ZPXp0Hn744ZYusdBOPfXUTJw4MQcddFC6d+/e6GcvSS6++OIWqmz9sXz58txxxx255ppr8vvf/z7bbLNNjj/++Bx11FHp1q1bS5dXaLvvvnsOPfTQnHHGGamqqsqjjz6arbbaKjNmzMjQoUPzv//7vy1dYqEtX748F198cX71q1/l+eefz9KlSxud99+OVevdu3eOP/74HHvssdlyyy1bupz1Tvv27fOxj30sxx13XI455pj07NmzpUtab2y00UY57LDDcvzxx2fPPfds6XLWS6+//nr++7//O/Pmzcs777zT6NzRRx/dQlUV35lnnpkbbrghixcvzmGHHZYTTjghn/3sZ1u6rPXG9ttvn6uvvtqcNdNOO+2UCy+8MAceeGCj9rvuuivf+c538uijj7ZQZcXnz+6au+6663LllVdm9uzZuf/++9OrV69MmDAhffr0yRe/+MWWLq+Qqqqq8te//jWf/vSnW7qU9c7OO++cZ599Nm+//XZ69eqVTp06NTo/c+bMFqps/bDddttl7NixGTp0aKPfETzxxBMZNGhQ/vnPf7Z0iYV299135zvf+U5+8IMfpF+/fk1+/jp37txCla0ZYUYBffzjH8+BBx6YsWPHpmPHji1dznqlV69euemmm/LZz3620b/onn322eyyyy5ZsGBBS5dYaJtttlmuvfbaJv9jQfO88sor+dnPfpYLLrggy5cvz4EHHpjTTjvNKpdV2GijjfL444+nT58+jf78zpkzJ5/4xCfy1ltvtXSJhXbeeeflF7/4Rc4444x873vfyznnnJM5c+bk1ltvzXnnnZfTTjutpUssrEsuuSQTJ07Mo48+mr322isnnHBCvvSlL6Vdu3YtXdp64bXXXsv111+fiRMn5rHHHsvee++dE044IUOHDk3btm1burxC+93vfpeJEyfmjjvuSK9evXL88cfn6KOPTo8ePVq6tPWCLwCtGV/AaL4777wzF154Ya644orssMP/be++o6I42zaAX0uTItVCUOnYMKjwat4YoggSG4pEjQ0UAWPsRBOVxFiIsbz2FjVRAbFGDZoQjBqlRFBjQcECKk1sWFA0AVFg5/sjx/2yWZqNmYXrd47nwMxGr3CY3Znnfp77eVvsOGpHT08PaWlpsLGxUTqek5ODNm3acNVa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srIaTENEdZ2W2AGIiIiIxPTXX39BR0dH5bi2tjYeP34sQiIiIiIiImmQy+ViRyAiUqi4vEpERERUB7z99tv44YcfVI7v3LkTjo6OIiQiIiIiIpKe4uJisSMQUR3HlRlERERUp82cORMDBgxAZmYmPDw8AABHjhzBjh07uF8GEREREdVpZWVlmD9/PtavX487d+7gypUrsLOzw8yZM2FjY4OgoCCxIxJRHcKVGURERFSneXt7Y9++fcjIyMC4cePw2Wef4caNGzh8+DB8fHzEjkdEREREJJp58+YhIiICixYtUmrN6uTkhI0bN4qYjIjqIm4ATkRERERERERERCocHBzw3XffoVu3bjA0NERKSgrs7OyQnp6OTp064eHDh2JHJKI6hG2miIiIiACcOXMGaWlpkMlkcHR0hLOzs9iRiIiIiIhEdfPmTTg4OKgcl8vlKCkpESEREdVlLGYQERFRnXb37l0MGTIE8fHxMDExgSAIePToEdzd3bFz5040atRI7IhERERERKJo06YNjh49Cmtra6Xju3fv5uQfIqpxLGYQERFRnTZx4kQ8fvwYFy9eROvWrQEAly5dgr+/PyZNmoQdO3aInJCIiIiISByzZ8/G8OHDcfPmTcjlckRFReHy5cuIjIzEL7/8InY8IqpjuGcGERER1WnGxsY4fPgwOnbsqHT85MmT6N69OwoKCsQJRkREREQkAQcPHsT8+fNx5swZyOVyuLi4YNasWejevbvY0YiojuHKDCIiIqrT5HI5tLW1VY5ra2tDLpeLkIiIiIiISDp69OiBHj16iB2DiAgaYgcgIiIiEpOHhweCg4Nx69YtxbGbN29i8uTJ6Natm4jJiIiIiIiIiOg5tpkiIiKiOu369evo168fLly4AEtLS8hkMuTm5sLJyQk//fQTmjVrJnZEIiIiIqIaY2ZmhitXrqBhw4YwNTWFTCar8LUPHjyowWREVNexzRQRERHVaZaWlkhOTsbhw4eRlpYGQRDg6OgIT09PsaMREREREdW45cuXw9DQUPF1ZcUMIqKaxJUZREREVGfJ5XJEREQgKioKOTk5kMlksLW1xcCBAzF8+HA+uBERERERERFJBIsZREREVCcJgoC+ffti//79aNeuHVq1agVBEJCWlobz58/D29sb+/btEzsmEREREZFo9u/fD01NTZUNwA8dOoSysjL06tVL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Q3H27Fno6Ohg7969r/TvEhERERHRq2Mxg4iIiIiIasTatWtRWlqKDh064IcffkBaWhouX76MrVu3Ij09HZqamvD09ESnTp3g4+ODgwcPIicnB8eOHcNXX32F06dPv9K/P378eDx48ABDhw7FyZMnkZWVhUOHDiEwMBBlZWX4448/MH/+fJw+fRq5ubmIiorCvXv30Lp169f0EyAiIiIiopfFNlNERERERFQj7O3tcfbsWcyfPx9ffPEFbty4gXr16sHR0RGff/45xo0bB5lMhv3792PGjBkIDAzEvXv38NZbb6FLly4wNzd/pX+/SZMmSEpKwvTp09GjRw88ffoU1tbW6NmzJzQ0NGBkZITff/8dK1aswOPHj2FtbY2lS5eiV69er+knQEREREREL0smCIIgdggiIiIiIiIiIiIiIqKKsM0UERERERERERERERFJGosZREREREREREREREQkaSxmEBERERERERERERGRpLGYQUREREREREREREREksZiBhERERERERERERERSRqLGUREREREREREREREJGksZhARERERERERERERkaSxmEFERERERERERERERJLGYgYREREREREREREREUkaixlERERERERERERERCRpLGYQEREREREREREREZGk/R96ZaMxxlZh5wAAAABJRU5ErkJggg=="/>
 </div>
 </div>
 </div>
@@ -10389,7 +10372,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1820]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [70]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Continue to explore the data to address your additional research</span>
@@ -10407,7 +10390,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[1820]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[70]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -10580,7 +10563,7 @@ dtype: int64</pre>
 <td>203388341</td>
 <td>Vanilla Sky</td>
 <td>Tom Cruise|PenÃ©lope Cruz|Cameron Diaz|Kurt Ru...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Cameron Crowe</td>
 <td>Forget everything you know, and open your eyes.</td>
 <td>...</td>
@@ -10604,9 +10587,9 @@ dtype: int64</pre>
 <td>0</td>
 <td>Stanley Kubrick: A Life in Pictures</td>
 <td>Tom Cruise|Stanley Kubrick|Barbara Kroner|Stev...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Jan Harlan</td>
-<td>NaN</td>
+<td>0</td>
 <td>...</td>
 <td>With commentary from Hollywood stars, outtakes...</td>
 <td>141</td>
@@ -10628,7 +10611,7 @@ dtype: int64</pre>
 <td>200276000</td>
 <td>Valkyrie</td>
 <td>Tom Cruise|Carice van Houten|Kenneth Branagh|B...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Bryan Singer</td>
 <td>Many saw evil. They dared to stop it.</td>
 <td>...</td>
@@ -10676,7 +10659,7 @@ dtype: int64</pre>
 <td>358372926</td>
 <td>Minority Report</td>
 <td>Tom Cruise|Colin Farrell|Samantha Morton|Max v...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Steven Spielberg</td>
 <td>The system is perfect until it comes after you.</td>
 <td>...</td>
@@ -10700,7 +10683,7 @@ dtype: int64</pre>
 <td>0</td>
 <td>Space Station 3D</td>
 <td>Tom Cruise|James Arnold|Michael J. Bloomfield|...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Toni Myers</td>
 <td>A Select Few Have Been Aboard... Now It's Your...</td>
 <td>...</td>
@@ -10724,7 +10707,7 @@ dtype: int64</pre>
 <td>223664608</td>
 <td>Interview with the Vampire</td>
 <td>Brad Pitt|Tom Cruise|Kirsten Dunst|Antonio Ban...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Neil Jordan</td>
 <td>Drink From Me And Live Forever.</td>
 <td>...</td>
@@ -10796,7 +10779,7 @@ dtype: int64</pre>
 <td>456758981</td>
 <td>The Last Samurai</td>
 <td>Tom Cruise|Ken Watanabe|William Atherton|Chad ...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Edward Zwick</td>
 <td>In the face of an enemy, in the Heart of One M...</td>
 <td>...</td>
@@ -10844,7 +10827,7 @@ dtype: int64</pre>
 <td>15502112</td>
 <td>Legend</td>
 <td>Tom Cruise|Mia Sara|Tim Curry|David Bennent|Al...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Ridley Scott</td>
 <td>There may never be another dawn.</td>
 <td>...</td>
@@ -10868,7 +10851,7 @@ dtype: int64</pre>
 <td>591739379</td>
 <td>War of the Worlds</td>
 <td>Tom Cruise|Dakota Fanning|Miranda Otto|Justin ...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Steven Spielberg</td>
 <td>They're already here.</td>
 <td>...</td>
@@ -10916,7 +10899,7 @@ dtype: int64</pre>
 <td>217764291</td>
 <td>Collateral</td>
 <td>Tom Cruise|Jamie Foxx|Jada Pinkett Smith|Mark ...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Michael Mann</td>
 <td>It started like any other night.</td>
 <td>...</td>
@@ -10940,7 +10923,7 @@ dtype: int64</pre>
 <td>63215872</td>
 <td>Lions for Lambs</td>
 <td>Robert Redford|Meryl Streep|Tom Cruise|Michael...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Robert Redford</td>
 <td>If you don't STAND for something, you might FA...</td>
 <td>...</td>
@@ -10964,7 +10947,7 @@ dtype: int64</pre>
 <td>63541777</td>
 <td>Risky Business</td>
 <td>Tom Cruise|Rebecca De Mornay|Joe Pantoliano|Ri...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Paul Brickman</td>
 <td>Time of your life, Huh Kid.</td>
 <td>...</td>
@@ -10988,7 +10971,7 @@ dtype: int64</pre>
 <td>17233166</td>
 <td>All the Right Moves</td>
 <td>Tom Cruise|Craig T. Nelson|Lea Thompson|Charle...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Michael Chapman</td>
 <td>He has everything at stake. He can't afford to...</td>
 <td>...</td>
@@ -11012,7 +10995,7 @@ dtype: int64</pre>
 <td>0</td>
 <td>Losin' It</td>
 <td>Tom Cruise|Jackie Earle Haley|John Stockwell|J...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Curtis Hanson</td>
 <td>The last word about the first time.</td>
 <td>...</td>
@@ -11060,7 +11043,7 @@ dtype: int64</pre>
 <td>137783840</td>
 <td>Far and Away</td>
 <td>Tom Cruise|Nicole Kidman|Thomas Gibson|Robert ...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Ron Howard</td>
 <td>What they needed was a country big enough for ...</td>
 <td>...</td>
@@ -11084,7 +11067,7 @@ dtype: int64</pre>
 <td>35856053</td>
 <td>Taps</td>
 <td>George C. Scott|Timothy Hutton|Ronny Cox|Sean ...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Harold Becker</td>
 <td>This school is our home, we think it's worth d...</td>
 <td>...</td>
@@ -11132,7 +11115,7 @@ dtype: int64</pre>
 <td>273552592</td>
 <td>Jerry Maguire</td>
 <td>Tom Cruise|Cuba Gooding Jr.|RenÃ©e Zellweger|K...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Cameron Crowe</td>
 <td>Everybody loved him... Everybody disappeared.</td>
 <td>...</td>
@@ -11180,7 +11163,7 @@ dtype: int64</pre>
 <td>161001698</td>
 <td>Born on the Fourth of July</td>
 <td>Tom Cruise|Raymond J. Barry|Caroline Kava|Holl...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Oliver Stone</td>
 <td>A story of innocence lost and courage found.</td>
 <td>...</td>
@@ -11204,7 +11187,7 @@ dtype: int64</pre>
 <td>354825435</td>
 <td>Rain Man</td>
 <td>Dustin Hoffman|Tom Cruise|Valeria Golino|Geral...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Barry Levinson</td>
 <td>A journey through understanding and fellowship.</td>
 <td>...</td>
@@ -11228,7 +11211,7 @@ dtype: int64</pre>
 <td>171504781</td>
 <td>Cocktail</td>
 <td>Tom Cruise|Bryan Brown|Elisabeth Shue|Lisa Ban...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Roger Donaldson</td>
 <td>When he pours, he reigns.</td>
 <td>...</td>
@@ -11252,7 +11235,7 @@ dtype: int64</pre>
 <td>157920733</td>
 <td>Days of Thunder</td>
 <td>Tom Cruise|Robert Duvall|Nicole Kidman|Randy Q...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Tony Scott</td>
 <td>You can't stop the thunder.</td>
 <td>...</td>
@@ -11276,7 +11259,7 @@ dtype: int64</pre>
 <td>270248367</td>
 <td>The Firm</td>
 <td>Tom Cruise|Jeanne Tripplehorn|Gene Hackman|Hol...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Sydney Pollack</td>
 <td>Power can be murder to resist.</td>
 <td>...</td>
@@ -11300,7 +11283,7 @@ dtype: int64</pre>
 <td>356830601</td>
 <td>Top Gun</td>
 <td>Tom Cruise|Kelly McGillis|Val Kilmer|Anthony E...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Tony Scott</td>
 <td>Up there with the best of the best.</td>
 <td>...</td>
@@ -11324,7 +11307,7 @@ dtype: int64</pre>
 <td>52293982</td>
 <td>The Color of Money</td>
 <td>Paul Newman|Tom Cruise|Mary Elizabeth Mastrant...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Martin Scorsese</td>
 <td>The Hustler isn't what he used to be. But he h...</td>
 <td>...</td>
@@ -11375,7 +11358,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1822]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2060]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Continue to explore the data to address your additional research</span>
@@ -11394,7 +11377,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[1822]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2060]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -11594,7 +11577,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2008]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2061]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_genres_of_top_five_movies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
@@ -11611,7 +11594,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2008]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2061]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -11690,7 +11673,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2009]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2062]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Must input genre type sums into "df_genres_of_top_five_movies" dataframe this way because indices of "df_most_popular_TC_movies" dataframe Are Held In The Form Of SERIES VALUES, therefore they CANNOT be used in a for loop</span>
@@ -11712,7 +11695,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2009]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2062]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -11791,7 +11774,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2007]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2063]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_genres_of_top_five_movies</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">rot</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">10.5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span> <span class="c1"># displays bar graph (used "rot=90" to make clear the difference between x-axis label and x-axis values)</span>
@@ -11808,7 +11791,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2007]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2063]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>Text(0.5, 1.0, 'Genre Amounts in Top 5 Most Popular Movies that Tom Cruise Cast In')</pre>
 </div>
@@ -11849,7 +11832,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2010]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2064]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_genre_percents</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'Genres'</span> <span class="p">:</span> <span class="p">[</span><span class="s1">'Action'</span><span class="p">,</span> <span class="s1">'Adventure'</span><span class="p">,</span> <span class="s1">'Animation'</span><span class="p">,</span> <span class="s1">'Comedy'</span><span class="p">,</span> <span class="s1">'Crime'</span><span class="p">,</span> <span class="s1">'Drama'</span><span class="p">,</span> <span class="s1">'Documentary'</span><span class="p">,</span> <span class="s1">'Family'</span><span class="p">,</span> <span class="s1">'Fantasy'</span><span class="p">,</span> <span class="s1">'Foreign'</span><span class="p">,</span> <span class="s1">'History'</span><span class="p">,</span> <span class="s1">'Horror'</span><span class="p">,</span> <span class="s1">'Music'</span><span class="p">,</span> <span class="s1">'Mystery'</span><span class="p">,</span> <span class="s1">'Romance'</span><span class="p">,</span> 
@@ -11866,7 +11849,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2010]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2064]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -12021,7 +12004,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2011]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2065]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Must input genre type sums into "df_genre_percents" dataframe this way because indices of "df_Tom_Cruise_movies" dataframe Are Held In The Form Of SERIES VALUES, therefore they CANNOT be used in a for loop</span>
@@ -12057,7 +12040,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2011]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2065]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -12212,7 +12195,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2012]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2066]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_genre_percents</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'Genres'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'Movies Cast In'</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">25.5</span><span class="p">,</span><span class="mi">16</span><span class="p">),</span> <span class="n">labels</span><span class="o">=</span><span class="n">df_genre_percents</span><span class="p">[</span><span class="s1">'Genres'</span><span class="p">],</span> <span class="n">autopct</span><span class="o">=</span><span class="s1">'</span><span class="si">%1.1f%%</span><span class="s1">'</span><span class="p">,</span> <span class="n">labeldistance</span><span class="o">=</span><span class="mf">0.85</span><span class="p">)</span> <span class="c1"># displays pie chart (autopct='%1.1f%%' shows percentage)</span>
@@ -12226,7 +12209,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2012]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2066]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>&lt;Axes: ylabel='Movies Cast In'&gt;</pre>
 </div>
@@ -12267,7 +12250,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1998]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2067]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_highest_TC_revenue</span> <span class="o">=</span> <span class="n">df_Tom_Cruise_movies</span><span class="p">[</span><span class="n">df_Tom_Cruise_movies</span><span class="p">[</span><span class="s1">'revenue'</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">400000000</span><span class="p">]</span> <span class="c1"># creates dataframe of movies with revenue more than or equal to 50K that Tom Cruise cast in</span>
@@ -12282,7 +12265,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[1998]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2067]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -12383,7 +12366,7 @@ dtype: int64</pre>
 <td>456758981</td>
 <td>The Last Samurai</td>
 <td>Tom Cruise|Ken Watanabe|William Atherton|Chad ...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Edward Zwick</td>
 <td>In the face of an enemy, in the Heart of One M...</td>
 <td>...</td>
@@ -12407,7 +12390,7 @@ dtype: int64</pre>
 <td>591739379</td>
 <td>War of the Worlds</td>
 <td>Tom Cruise|Dakota Fanning|Miranda Otto|Justin ...</td>
-<td>NaN</td>
+<td>0</td>
 <td>Steven Spielberg</td>
 <td>They're already here.</td>
 <td>...</td>
@@ -12506,7 +12489,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2013]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2068]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_highest_revenue_genres</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
@@ -12523,7 +12506,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2013]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2068]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -12610,7 +12593,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2019]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2069]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Must input genre type sums into "df_highest_revenue_genres" dataframe this way because indices of "df_highest_TC_revenue" dataframe Are Held In The Form Of SERIES VALUES, therefore they CANNOT be used in a for loop</span>
@@ -12634,7 +12617,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2019]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2069]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -12721,7 +12704,7 @@ dtype: int64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2020]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2070]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_highest_revenue_genres</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">rot</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">10.5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span> <span class="c1"># displays bar graph (used "rot=90" to make clear the difference between x-axis label and x-axis values)</span>
@@ -12738,7 +12721,7 @@ dtype: int64</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2020]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2070]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>Text(0.5, 1.0, 'Genre Amounts in Movies with 6 Highest Revenues that Tom Cruise Cast In')</pre>
 </div>
@@ -12771,18 +12754,7 @@ dtype: int64</pre>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p><a id="conclusions"></a></p>
-<h2 id="Conclusions">Conclusions<a class="anchor-link" href="#Conclusions">¶</a></h2><blockquote>
-<p><strong>Tip</strong>: Finally, summarize your findings and the results that have been performed in relation to the question(s) provided at the beginning of the analysis. Summarize the results accurately, and point out where additional research can be done or where additional information could be useful.</p>
-</blockquote>
-<blockquote>
-<p><strong>Tip</strong>: Make sure that you are clear with regards to the limitations of your exploration. You should have at least 1 limitation explained clearly.</p>
-</blockquote>
-<blockquote>
-<p><strong>Tip</strong>: If you haven't done any statistical tests, do not imply any statistical conclusions. And make sure you avoid implying causation from correlation!</p>
-</blockquote>
-<blockquote>
-<p><strong>Tip</strong>: Once you are satisfied with your work here, check over your report to make sure that it is satisfies all the areas of the rubric (found on the project submission page at the end of the lesson). You should also probably remove all of the "Tips" like this one so that the presentation is as polished as possible.</p>
-</blockquote>
+<h2 id="Conclusions">Conclusions<a class="anchor-link" href="#Conclusions">¶</a></h2>
 </div>
 </div>
 </div>
@@ -12851,15 +12823,7 @@ These graph <strong>findings</strong> of <em>Cell 23</em> conclude that the most
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Submitting-your-Project">Submitting your Project<a class="anchor-link" href="#Submitting-your-Project">¶</a></h2><blockquote>
-<p><strong>Tip</strong>: Before you submit your project, you need to create a .html or .pdf version of this notebook in the workspace here. To do that, run the code cell below. If it worked correctly, you should see output that starts with <code>NbConvertApp] Converting notebook</code>, and you should see the generated .html file in the workspace directory (click on the orange Jupyter icon in the upper left).</p>
-</blockquote>
-<blockquote>
-<p><strong>Tip</strong>: Alternatively, you can download this report as .html via the <strong>File</strong> &gt; <strong>Download as</strong> submenu, and then manually upload it into the workspace directory by clicking on the orange Jupyter icon in the upper left, then using the Upload button.</p>
-</blockquote>
-<blockquote>
-<p><strong>Tip</strong>: Once you've done this, you can submit your project by clicking on the "Submit Project" button in the lower right here. This will create and submit a zip file with this .ipynb doc and the .html or .pdf version you created. Congratulations!</p>
-</blockquote>
+<h2 id="Submitting-your-Project">Submitting your Project<a class="anchor-link" href="#Submitting-your-Project">¶</a></h2>
 </div>
 </div>
 </div>
