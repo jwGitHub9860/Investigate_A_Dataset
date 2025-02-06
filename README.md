@@ -15,6 +15,10 @@ tmdb-movies.csv
 ## Credits
 ###### References used while making project
 
+CJMCJM. “How to Plot a Line Graph for Each Column.” _Stack Overflow_, 1 Mar. 1966, stackoverflow.com/questions/66932677/how-to-plot-a-line-graph-for-each-column. Accessed 2 Feb. 2025.
+
+Connie. "Questions for Project 1 - Movie Dataset Questions - Please confirm these can be used for project?" _Knowledge_, Udacity, knowledge.udacity.com/questions/716330. Accessed 1 Feb. 2025.
+
 "Data Wrangling with pandas Cheat Sheet." pandas.pydata.org/Pandas_Cheat_Sheet.pdf. Accessed 22 Jan. 2025.
 
 “Different ways to iterate over Rows in Pandas Dataframe.” _GeeksforGeeks_, 27 Nov. 2024, www.geeksforgeeks.org/different-ways-to-iterate-over-rows-in-pandas-dataframe/. Accessed 29 Jan. 2025.
