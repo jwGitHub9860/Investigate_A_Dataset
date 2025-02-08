@@ -23,7 +23,11 @@ Connie. "Questions for Project 1 - Movie Dataset Questions - Please confirm thes
 
 “Different ways to iterate over Rows in Pandas Dataframe.” _GeeksforGeeks_, 27 Nov. 2024, www.geeksforgeeks.org/different-ways-to-iterate-over-rows-in-pandas-dataframe/. Accessed 29 Jan. 2025.
 
+Eeuwigestudent1, and meWmeW. “How to Display X-Axis Labels for Graph of Pandas Dataframe.” _Stack Overflow_, 1 Jan. 1964, stackoverflow.com/questions/54243992/how-to-display-x-axis-labels-for-graph-of-pandas-dataframe/54244024. Accessed 8 Feb 2025.
+
 Gillis, Alexander S. “What Is Refactoring (Code Refactoring)?” _Search App Architecture_, TechTarget, 15 Sept. 2021, www.techtarget.com/searchapparchitecture/definition/refactoring#:~:text=Refactoring%20is%20the%20process%20of,altering%20the%20code’s%20external%20behavior. Accessed 22 Jan. 2025.
+
+“How to Customize Line Graph in Jupyter Notebook.” _GeeksforGeeks_, GeeksforGeeks, 16 Oct. 2023, www.geeksforgeeks.org/how-to-customize-line-graph-in-jupyter-notebook/. Accessed 8 Feb. 2025.
 
 “How to Drop Index Column in Pandas?” _GeeksforGeeks_, GeeksforGeeks, 29 Nov. 2024, www.geeksforgeeks.org/how-to-drop-the-index-column-in-pandas/. Accessed 30 Jan 2025.
 
