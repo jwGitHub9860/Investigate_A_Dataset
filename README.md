@@ -1,7 +1,7 @@
 # Project: Investigate_A_Dataset
 ### Description:
 
-The dataset project answers three given questions about the data in the csv file.
+The dataset project answers two given questions about the data in the csv file.
 
 ## Files Used
 ```
